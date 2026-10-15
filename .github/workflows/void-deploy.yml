@@ -53,6 +53,25 @@ jobs:
           fi
           echo "Using Cloudflare account: $(echo "$body" | jq -r '.result[0].name')"
           echo "CLOUDFLARE_ACCOUNT_ID=$(echo "$body" | jq -r '.result[0].id')" >> "$GITHUB_ENV"
+      # Fails early, with a reason, when the Access service token is not let in.
+      - name: Check the Access service token
+        env:
+          ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+          URL: https://avvos-hq.${{ vars.CLOUDFLARE_WORKERS_SUBDOMAIN || 'hmztkn' }}.workers.dev/
+        run: |
+          if [ -z "$ID" ] || [ -z "$SECRET" ]; then
+            echo "No Access service token set; skipping."
+            exit 0
+          fi
+          case "$ID" in *.access) ;; *) echo "::warning::CF_ACCESS_CLIENT_ID should end in .access (copy only the value, not the header name).";; esac
+          case "$ID$SECRET" in *" "*|*:*) echo "::warning::The Access secrets contain a space or colon; copy only the values, not the header names.";; esac
+          code=$(curl -s -o /dev/null -w '%{http_code}' -H "CF-Access-Client-Id: $ID" -H "CF-Access-Client-Secret: $SECRET" "$URL")
+          echo "Access answered HTTP $code for $URL with the service token"
+          if [ "$code" != "200" ]; then
+            echo "::error::Access did not let the service token in (HTTP $code). Check that the Worker's Access application has a Service Auth policy that includes this token."
+            exit 1
+          fi
       - name: Deploy
         env:
           # Add this scoped token at Settings → Secrets and variables → Actions.
