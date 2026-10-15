@@ -1,47 +1,42 @@
 # Avvos HQ
 
-A calm home base: one page that greets you, keeps a single intention for the day,
-offers a Stoic thought, and puts every app you live in one key away.
+One plain page for my apps, inbox, calendar and AI tools.
 
-- **Rooms**: Pergent (with its News, Tech and Pains tabs), Aletheia, Gmail, Calendar, Claude and ChatGPT.
-- **The presence**: the orb in the middle breathes, follows your pointer, ticks the seconds on its dial,
-  and changes colour with the time of day (dawn, day, dusk, night).
-- **Thought for today**: a different Stoic passage each day from Seneca, Marcus Aurelius and Epictetus.
-- **Today's one thing**: write one intention, tick it off, and carry it over if yesterday's slipped.
-  It is stored in this browser only (`localStorage`).
-- **Ask a mind**: type a question and open it in Claude or ChatGPT.
-- **Zen**: click the orb (or press `Z`) for a guided breathing loop: in 4, hold 4, out 6.
+- **Sidebar links:** Pergent (with its News, Tech and Pains tabs), Aletheia, Gmail, Calendar, Claude and ChatGPT.
+- **Today's one thing:** write one goal for the day and tick it off. If yesterday's didn't get done, the page offers to carry it over. It is saved in this browser only (`localStorage`).
+- **Ask:** type a question and open it in Claude or ChatGPT.
+- **Thought for today:** a Stoic passage from Seneca, Marcus Aurelius or Epictetus, different each day.
 
-## Shortcuts
+Keys: `1`–`6` open the links, `/` jumps to the ask box.
 
-| Key | Does |
-| --- | --- |
-| `1`–`6` | Open Pergent, Aletheia, Gmail, Calendar, Claude, ChatGPT |
-| `/` | Focus the ask bar |
-| `Z` | Enter or leave zen |
-| `Esc` | Leave zen |
+## Stack
 
-## Make it yours
+Built with [Vite+](https://viteplus.dev) (the `vp` toolchain: Vite 8, Vitest, Oxlint, Oxfmt) and [Void](https://void.cloud), VoidZero's full-stack framework and deploy CLI for Cloudflare Workers. Pages are React, server-rendered by Void's pages mode.
 
-- Add or change a room in `public/index.html` (each one is an `<a class="room">` in the sidebar;
-  give it a `data-key` to get a number shortcut).
-- Add your own principles to `HQ_THOUGHTS` in `public/thoughts.js`; they join the daily rotation.
-  The short lines under the greeting live in `HQ_WHISPERS` in the same file.
+| Path               | What it is                                                         |
+| ------------------ | ------------------------------------------------------------------ |
+| `pages/layout.tsx` | The sidebar and keyboard shortcuts                                 |
+| `pages/index.tsx`  | The home page: greeting, today's one thing, ask, thought for today |
+| `src/rooms.ts`     | The sidebar links. Add one here; `key` sets its number shortcut    |
+| `src/thoughts.ts`  | Stoic passages and the short line under the greeting. Add your own |
+| `src/styles.css`   | All styles                                                         |
+| `void.config.ts`   | Site `<head>` defaults and the Worker compatibility date           |
 
 ## Run it
 
-It is plain HTML, CSS and JavaScript with no build step.
+Needs Node.js 24.21 or newer (Void's requirement) and pnpm.
 
 ```sh
-npx wrangler dev          # http://localhost:8787, served the way Cloudflare will serve it
-# or
-python3 -m http.server -d public 8000
+pnpm install
+pnpm dev        # vp dev, http://localhost:5173
+pnpm check      # vp check: format, lint
+pnpm build      # vp build
 ```
 
 ## Deploy
 
-`wrangler.jsonc` serves `public/` with Cloudflare Workers Static Assets.
-
 ```sh
-npx wrangler deploy
+pnpm run deploy  # void deploy: signs in to Cloudflare the first time, builds and uploads
 ```
+
+Nothing has been deployed yet.
