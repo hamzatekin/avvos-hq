@@ -11,7 +11,9 @@ Keys: `1`–`6` open the links, `/` jumps to the ask box.
 
 ## Stack
 
-Built with [Vite+](https://viteplus.dev) (the `vp` toolchain: Vite 8, Vitest, Oxlint, Oxfmt) and [Void](https://void.cloud), VoidZero's full-stack framework and deploy CLI for Cloudflare Workers. Pages are React, server-rendered by Void's pages mode.
+Built with [Vite+](https://viteplus.dev) (the `vp` toolchain: Vite 8, Vitest, Oxlint, Oxfmt) and [Void](https://void.cloud), VoidZero's full-stack framework and deploy CLI for Cloudflare Workers. Pages are React, server-rendered by Void's pages mode, styled with [Tailwind CSS v4](https://tailwindcss.com) and self-hosted [Inter](https://rsms.me/inter/).
+
+The look is a light, Linear-style dashboard. Motion and interaction details follow Emil Kowalski's [design engineering skills](https://github.com/emilkowalski/skills): press feedback on buttons, no animation on keyboard actions, short ease-out transitions, hover styles only on devices that can hover.
 
 | Path               | What it is                                                         |
 | ------------------ | ------------------------------------------------------------------ |
@@ -19,7 +21,8 @@ Built with [Vite+](https://viteplus.dev) (the `vp` toolchain: Vite 8, Vitest, Ox
 | `pages/index.tsx`  | The home page: greeting, today's one thing, ask, thought for today |
 | `src/rooms.ts`     | The sidebar links. Add one here; `key` sets its number shortcut    |
 | `src/thoughts.ts`  | Stoic passages and the short line under the greeting. Add your own |
-| `src/styles.css`   | All styles                                                         |
+| `src/styles.css`   | Tailwind theme: colours, shadows, easing curves                    |
+| `src/ui.tsx`       | Shared pieces: card, buttons, input, keyboard key                  |
 | `void.config.ts`   | Site `<head>` defaults and the Worker compatibility date           |
 
 ## Run it

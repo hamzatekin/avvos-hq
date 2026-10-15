@@ -18,16 +18,8 @@ export default defineConfig({
         name: "description",
         content: "Avvos HQ: one page for my apps, inbox, calendar and AI tools.",
       },
-      { name: "theme-color", content: "#f6f6f3" },
+      { name: "theme-color", content: "#f4f4f5" },
     ],
-    link: [
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap",
-      },
-    ],
+    link: [{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
   },
 });

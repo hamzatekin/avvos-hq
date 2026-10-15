@@ -1,4 +1,4 @@
-// The links in the sidebar. `key` is the number shortcut that opens a room.
+// The links in the sidebar and the Apps grid. `key` is the number shortcut that opens a room.
 
 export type IconName = "sunrise" | "notebook" | "mail" | "calendar" | "sparkle" | "chat";
 
@@ -23,7 +23,7 @@ export const roomGroups: RoomGroup[] = [
       {
         key: "1",
         name: "Pergent",
-        note: "Daily runs from the Hetzner box",
+        note: "News, tech and pains digests",
         href: "https://pergent.hamzatekin.dev/",
         icon: "sunrise",
         tabs: [
@@ -35,7 +35,7 @@ export const roomGroups: RoomGroup[] = [
       {
         key: "2",
         name: "Aletheia",
-        note: "Notes",
+        note: "Notes and ideas",
         href: "https://aletheia.hmztkn.workers.dev/",
         icon: "notebook",
       },
@@ -54,7 +54,7 @@ export const roomGroups: RoomGroup[] = [
       {
         key: "4",
         name: "Calendar",
-        note: "Standups and meetings",
+        note: "Work meetings",
         href: "https://calendar.google.com/",
         icon: "calendar",
       },
@@ -66,14 +66,14 @@ export const roomGroups: RoomGroup[] = [
       {
         key: "5",
         name: "Claude",
-        note: "claude.ai",
+        note: "New chat",
         href: "https://claude.ai/new",
         icon: "sparkle",
       },
       {
         key: "6",
         name: "ChatGPT",
-        note: "chatgpt.com",
+        note: "New chat",
         href: "https://chatgpt.com/",
         icon: "chat",
       },
