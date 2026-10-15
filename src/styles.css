@@ -41,6 +41,8 @@
   button,
   kbd {
     user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
 
   a,
@@ -67,4 +69,14 @@
       transform: scale(0.97);
     }
   }
+}
+
+/* Keep content clear of the notch and home indicator (viewport-fit=cover). */
+@utility safe-x {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+@utility safe-b {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
 }

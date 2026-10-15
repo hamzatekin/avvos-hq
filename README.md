@@ -9,6 +9,10 @@ One plain page for my apps, inbox, calendar and AI tools.
 
 Keys: `1`–`6` open the links, `/` jumps to the ask box.
 
+It installs as an app (PWA): in Chrome or Edge use the **Install** button in the header or the install icon in the
+address bar; on iPhone use Share → **Add to Home Screen**. Install it while signed in to Cloudflare Access. A small
+service worker (`public/sw.js`) loads pages from the network first and keeps the last copy for when you're offline.
+
 ## Stack
 
 Built with [Vite+](https://viteplus.dev) (the `vp` toolchain: Vite 8, Vitest, Oxlint, Oxfmt) and [Void](https://void.cloud), VoidZero's full-stack framework and deploy CLI for Cloudflare Workers. Pages are React, server-rendered by Void's pages mode, styled with [Tailwind CSS v4](https://tailwindcss.com) and self-hosted [Inter](https://rsms.me/inter/).
@@ -24,6 +28,8 @@ The look is a light, Linear-style dashboard. Motion and interaction details foll
 | `src/styles.css`   | Tailwind theme: colours, shadows, easing curves                    |
 | `src/ui.tsx`       | Shared pieces: card, buttons, input, keyboard key                  |
 | `void.config.ts`   | Site `<head>` defaults and the Worker compatibility date           |
+| `public/`          | Favicon, app icons, `manifest.webmanifest` and the service worker  |
+| `src/pwa.ts`       | Service worker registration and the Install button's prompt        |
 
 ## Run it
 

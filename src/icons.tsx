@@ -1,6 +1,15 @@
 import type { IconName } from "./rooms";
 
-type Name = IconName | "home" | "arrow" | "shuffle" | "check" | "target" | "quote" | "send";
+type Name =
+  | IconName
+  | "home"
+  | "arrow"
+  | "shuffle"
+  | "check"
+  | "target"
+  | "quote"
+  | "send"
+  | "download";
 
 const paths: Record<Name, React.ReactNode> = {
   sunrise: (
@@ -47,6 +56,7 @@ const paths: Record<Name, React.ReactNode> = {
     <path d="M10 7.5c-2.6.8-4.5 3-4.5 6v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H6.6M18.5 7.5c-2.6.8-4.5 3-4.5 6v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.9" />
   ),
   send: <path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5" />,
+  download: <path d="M12 4.5v10M7.5 10.5 12 15l4.5-4.5M5 19.5h14" />,
 };
 
 export function Icon({ name, className = "size-4" }: { name: Name; className?: string }) {

@@ -13,13 +13,28 @@ export default defineConfig({
     htmlAttrs: { lang: "en" },
     meta: [
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
+      },
       {
         name: "description",
         content: "Avvos HQ: one page for my apps, inbox, calendar and AI tools.",
       },
-      { name: "theme-color", content: "#f4f4f5" },
+      // The white header on phones. Wider screens switch it to the grey canvas (src/pwa.ts).
+      { name: "theme-color", content: "#ffffff" },
+      { name: "color-scheme", content: "light" },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-title", content: "HQ" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
     ],
-    link: [{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+    link: [
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
+      // The site sits behind Cloudflare Access, and browsers fetch the manifest without
+      // cookies unless told otherwise; without this it would get the login redirect.
+      { rel: "manifest", href: "/manifest.webmanifest", crossorigin: "use-credentials" },
+    ],
   },
 });

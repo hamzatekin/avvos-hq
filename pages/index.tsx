@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "../src/icons";
 import { roomGroups } from "../src/rooms";
 import { load, save } from "../src/storage";
+import { useInstallPrompt } from "../src/pwa";
 import { nudges, thoughts } from "../src/thoughts";
 import { clock, dayOfYear, greetingFor, partOfDay, useNow, ymd } from "../src/time";
 import { BrandMark, button, Card, input, Kbd } from "../src/ui";
@@ -26,7 +27,7 @@ export default function HomePage() {
 
   return (
     <>
-      <header className="flex h-12 items-center justify-between gap-3 border-b border-line px-4 md:px-6">
+      <header className="safe-x flex h-12 items-center justify-between gap-3 border-b border-line md:px-6">
         <div className="flex items-center gap-2 text-[13px] font-medium text-ink">
           <span className="md:hidden">
             <BrandMark />
@@ -34,20 +35,23 @@ export default function HomePage() {
           <span className="md:hidden">Avvos HQ</span>
           <span className="hidden md:inline">Home</span>
         </div>
-        <p className="text-[13px] text-ink-2 tabular-nums">
-          {now ? (
-            <>
-              <span className="sm:hidden">{shortDate.format(now)}</span>
-              <span className="max-sm:hidden">{dateFormat.format(now)}</span>{" "}
-              <span className="text-ink-3">·</span> {clock(now)}
-            </>
-          ) : (
-            " "
-          )}
-        </p>
+        <div className="flex items-center gap-3">
+          <InstallButton />
+          <p className="text-[13px] text-ink-2 tabular-nums">
+            {now ? (
+              <>
+                <span className="sm:hidden">{shortDate.format(now)}</span>
+                <span className="max-sm:hidden">{dateFormat.format(now)}</span>{" "}
+                <span className="text-ink-3">·</span> {clock(now)}
+              </>
+            ) : (
+              " "
+            )}
+          </p>
+        </div>
       </header>
 
-      <div className="mx-auto w-full max-w-[1040px] px-4 pt-8 pb-16 md:px-10 md:pt-12">
+      <div className="safe-x safe-b mx-auto w-full max-w-[1040px] pt-8 md:px-10 md:pt-12">
         <h1 className="text-[24px] leading-tight font-semibold tracking-[-0.02em] text-balance text-ink md:text-[26px]">
           {now ? greetingFor(hour) : "Welcome back"}, Avvos
         </h1>
@@ -65,6 +69,17 @@ export default function HomePage() {
         </div>
       </div>
     </>
+  );
+}
+
+function InstallButton() {
+  const { canInstall, install } = useInstallPrompt();
+  if (!canInstall) return null;
+  return (
+    <button type="button" className={button.ghost} onClick={install}>
+      <Icon name="download" className="size-3.5" />
+      Install
+    </button>
   );
 }
 

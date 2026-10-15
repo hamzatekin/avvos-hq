@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { Icon } from "../src/icons";
+import { registerServiceWorker, syncThemeColor } from "../src/pwa";
 import { roomGroups } from "../src/rooms";
 import { BrandMark, Kbd } from "../src/ui";
 import "../src/styles.css";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(registerServiceWorker, []);
+  useEffect(syncThemeColor, []);
+
   // 1–6 open a link, / jumps to the ask box. No animation on any of these.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
