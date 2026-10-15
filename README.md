@@ -35,8 +35,13 @@ pnpm build      # vp build
 
 ## Deploy
 
+Every push to `main` deploys through GitHub Actions (`.github/workflows/void-deploy.yml`), which runs
+`void deploy --platform cloudflare`. It needs one repository secret, `CLOUDFLARE_API_TOKEN`: a Cloudflare
+API token made from the "Edit Cloudflare Workers" template. If the token can reach more than one account,
+also set a `CLOUDFLARE_ACCOUNT_ID` repository variable.
+
+To deploy from your own machine instead:
+
 ```sh
 pnpm run deploy  # void deploy: signs in to Cloudflare the first time, builds and uploads
 ```
-
-Nothing has been deployed yet.
