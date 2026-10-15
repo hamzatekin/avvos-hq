@@ -5,6 +5,9 @@ export default defineConfig({
   worker: {
     compatibility_date: "2026-02-24",
   },
+  cloudflare: {
+    name: "avvos-hq",
+  },
   head: {
     title: "Avvos HQ",
     htmlAttrs: { lang: "en" },
