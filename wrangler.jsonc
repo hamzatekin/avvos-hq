@@ -1,0 +1,9 @@
+// Avvos HQ is a static site served by Cloudflare Workers Static Assets.
+// Preview locally with `npx wrangler dev`, publish with `npx wrangler deploy`.
+{
+  "name": "avvos-hq",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
