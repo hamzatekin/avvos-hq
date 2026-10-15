@@ -43,6 +43,12 @@ Every push to `main` deploys through GitHub Actions (`.github/workflows/void-dep
 API token made from the "Edit Cloudflare Workers" template. If the token can reach more than one account,
 also set a `CLOUDFLARE_ACCOUNT_ID` repository variable.
 
+The site sits behind Cloudflare Access, and `void deploy` checks each new version before switching traffic to
+it, so the workflow also needs an Access service token: create one under Zero Trust → Access controls →
+Service credentials → Service Tokens, add a **Service Auth** policy that includes it to the Worker's Access
+application, and save its ID and secret as the `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET` repository
+secrets.
+
 To deploy from your own machine instead:
 
 ```sh
